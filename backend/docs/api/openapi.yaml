@@ -1,0 +1,434 @@
+openapi: 3.0.3
+info:
+  title: hardware-erp-api
+  version: 0.1.0
+  description: MVP ERP backend API for hardware trading workflows.
+servers:
+  - url: /api/v1
+paths:
+  /auth/login:
+    post:
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: OK
+  /auth/password:
+    put:
+      summary: Update current user password
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [oldPassword, password]
+              properties:
+                oldPassword:
+                  type: string
+                password:
+                  type: string
+                  minLength: 5
+                  maxLength: 64
+      responses:
+        '200':
+          description: OK
+  /sales-orders/{id}:
+    get:
+      summary: Get sales order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+    put:
+      summary: Update sales order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesUpdateRequest'
+      responses:
+        '200':
+          description: OK
+  /sales-orders/{id}/confirm:
+    post:
+      summary: Confirm sales order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+  /sales-orders/{id}/cancel:
+    post:
+      summary: Cancel sales order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+  /sales-orders/{id}/resubmit:
+    post:
+      summary: Resubmit sales order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+  /sales-orders/{id}/create-outbound:
+    post:
+      summary: Create outbound order from sales order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOutboundRequest'
+      responses:
+        '200':
+          description: OK
+  /purchase-orders/{id}:
+    get:
+      summary: Get purchase order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+    put:
+      summary: Update purchase order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseUpdateRequest'
+      responses:
+        '200':
+          description: OK
+  /purchase-orders/{id}/cancel:
+    post:
+      summary: Cancel purchase order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+  /purchase-orders/{id}/resubmit:
+    post:
+      summary: Resubmit purchase order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+  /purchase-orders/{id}/create-inbound:
+    post:
+      summary: Create inbound order from purchase order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInboundRequest'
+      responses:
+        '200':
+          description: OK
+  /inventory/inbound-orders:
+    get:
+      summary: List inbound orders
+      responses:
+        '200':
+          description: OK
+  /inventory/inbound-orders/{id}:
+    get:
+      summary: Get inbound order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+  /inventory/outbound-orders:
+    get:
+      summary: List outbound orders
+      responses:
+        '200':
+          description: OK
+  /inventory/outbound-orders/{id}:
+    get:
+      summary: Get outbound order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+  /finance/receivables:
+    get:
+      summary: List receivables
+      responses:
+        '200':
+          description: OK
+  /finance/payables:
+    get:
+      summary: List payables
+      responses:
+        '200':
+          description: OK
+  /finance/writeoffs:
+    get:
+      summary: List writeoffs
+      responses:
+        '200':
+          description: OK
+  /finance/writeoffs/{id}:
+    get:
+      summary: Get writeoff
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+  /finance/receipts:
+    post:
+      summary: Create receipt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiptRequest'
+      responses:
+        '200':
+          description: OK
+  /finance/payments:
+    post:
+      summary: Create payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: OK
+  /finance/writeoffs/reverse:
+    post:
+      summary: Reverse writeoff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReverseWriteoffRequest'
+      responses:
+        '200':
+          description: OK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    SalesOutboundRequest:
+      type: object
+      required: [warehouse_id]
+      properties:
+        warehouse_id:
+          type: integer
+        remark:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            required: [line_no]
+            properties:
+              line_no:
+                type: integer
+              sn_codes:
+                type: array
+                items:
+                  type: string
+    SalesUpdateRequest:
+      type: object
+      properties:
+        contact_name:
+          type: string
+        contact_phone:
+          type: string
+        remark:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            required: [line_no, sku_id, quantity, unit_price, discount_rate, tax_rate]
+            properties:
+              line_no:
+                type: integer
+              sku_id:
+                type: integer
+              quantity:
+                type: string
+              unit:
+                type: string
+              unit_price:
+                type: string
+              discount_rate:
+                type: string
+              tax_rate:
+                type: string
+              remark:
+                type: string
+    PurchaseInboundRequest:
+      type: object
+      properties:
+        remark:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            required: [line_no]
+            properties:
+              line_no:
+                type: integer
+              sn_codes:
+                type: array
+                items:
+                  type: string
+    PurchaseUpdateRequest:
+      type: object
+      properties:
+        contact_name:
+          type: string
+        contact_phone:
+          type: string
+        currency:
+          type: string
+        tax_rate:
+          type: string
+        remark:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            required: [line_no, sku_id, quantity, unit_price, tax_rate]
+            properties:
+              line_no:
+                type: integer
+              sku_id:
+                type: integer
+              quantity:
+                type: string
+              unit:
+                type: string
+              unit_price:
+                type: string
+              tax_rate:
+                type: string
+              remark:
+                type: string
+    ReceiptRequest:
+      type: object
+      required: [receivable_id, amount]
+      properties:
+        receivable_id:
+          type: integer
+        amount:
+          type: string
+        remark:
+          type: string
+    PaymentRequest:
+      type: object
+      required: [payable_id, amount]
+      properties:
+        payable_id:
+          type: integer
+        amount:
+          type: string
+        remark:
+          type: string
+    ReverseWriteoffRequest:
+      type: object
+      required: [writeoff_id]
+      properties:
+        writeoff_id:
+          type: integer
+        remark:
+          type: string

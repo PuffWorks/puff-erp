@@ -1,0 +1,15 @@
+[Unit]
+Description=Hardware ERP API
+After=network-online.target mysqld.service redis.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/www/wwwroot/hardware-erp/backend
+ExecStart=/www/wwwroot/hardware-erp/backend/hardware-erp -config /www/wwwroot/hardware-erp/backend/config.yaml
+Restart=always
+RestartSec=5
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target

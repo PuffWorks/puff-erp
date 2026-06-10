@@ -1,0 +1,1 @@
+import{_ as o}from"./Customer360Drawer.vue_vue_type_script_setup_true_lang-LKJKTPci.js";import"./index-DWf9rLmA.js";import"./Customer360Tabs-DtiCYLsN.js";import"./descriptions-item-CA-5_vnc.js";import"./index-DePvPFn-.js";export{o as default};

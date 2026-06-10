@@ -1,0 +1,64 @@
+app:
+  name: hardware-erp-api
+  env: prod
+  host: 0.0.0.0
+  port: 8080
+  debug: false
+  read_timeout_seconds: 15
+  write_timeout_seconds: 15
+
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  database: hardware_erp_mvp
+  username: root
+  password: change-me
+  charset: utf8mb4
+  parse_time: true
+  loc: Local
+  max_idle_conns: 20
+  max_open_conns: 200
+  conn_max_lifetime_minutes: 60
+
+redis:
+  enabled: true
+  host: 127.0.0.1
+  port: 6379
+  password: ""
+  db: 0
+  pool_size: 50
+  dial_timeout_seconds: 5
+  read_timeout_seconds: 3
+  write_timeout_seconds: 3
+
+cache:
+  enabled: true
+  fallback_to_db: true
+  key_prefix: erp
+
+jwt:
+  secret: change-me-to-random-string
+  issuer: hardware-erp-api
+  access_token_expire_minutes: 720
+
+storage:
+  driver: local
+  local_path: /www/wwwdata/hardware-erp/uploads
+  public_url: ""
+
+license:
+  dir: /www/wwwroot/hardware-erp/backend/license
+  public_key: ""
+  public_key_file: ./license_public.key
+
+log:
+  level: info
+  path: /www/wwwroot/hardware-erp/backend/logs/app.log
+
+rate_limit:
+  enabled: true
+  requests_per_minute: 600
+
+cors:
+  allowed_origins: []
+  allow_credentials: true

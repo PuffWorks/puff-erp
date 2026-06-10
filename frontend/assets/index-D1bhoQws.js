@@ -1,0 +1,1 @@
+import{N as r,O as t,P as o,aa as c}from"./index-DWf9rLmA.js";function n(e){return o("/projects",e)}function u(e){return r(t.get(`/projects/${e}`))}function p(e){return r(t.post("/projects",e))}function j(e,s){return r(t.put(`/projects/${e}`,s))}function i(e){return c(t.delete(`/projects/${e}`))}export{p as c,i as d,u as g,n as l,j as u};

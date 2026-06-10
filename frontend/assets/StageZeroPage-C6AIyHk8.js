@@ -1,0 +1,1 @@
+import{d as o,a,b as s,g as c,K as n,_ as r}from"./index-DWf9rLmA.js";const p={class:"crm-stage-zero-page"},_=o({__name:"StageZeroPage",props:{description:{}},setup(e){return(i,d)=>{const t=n;return a(),s("div",p,[c(t,{description:e.description},null,8,["description"])])}}}),l=r(_,[["__scopeId","data-v-3e4ef10a"]]);export{l as default};

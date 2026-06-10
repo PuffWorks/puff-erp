@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="icon" href="/favicon.ico" />
+    <script>
+      (function () {
+        var metaEl = document.createElement('meta');
+        metaEl.setAttribute('name', 'viewport');
+        var responsive = true;
+        try {
+          responsive = JSON.parse(
+            localStorage.getItem('theme') || '{}'
+          ).responsive;
+        } catch (e) {
+          console.error(e);
+        }
+        if (responsive === false) {
+          metaEl.setAttribute('content', 'width=1200, initial-scale=1.0');
+        } else {
+          metaEl.setAttribute(
+            'content',
+            'width=device-width, initial-scale=1.0'
+          );
+          document.documentElement.style.overflowX = 'hidden';
+        }
+        document.head.appendChild(metaEl);
+        if (navigator.userAgent.includes('WebKit')) {
+          document.documentElement.classList.add('is-webkit');
+        }
+      })();
+    </script>
+    <title>圣泰安科技</title>
+    <style>
+      .ele-admin-loading {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        grid-gap: 8px;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        transform: rotate(45deg);
+        animation: loadingRotate 1.2s infinite linear;
+        position: fixed;
+        top: calc(50% - 14px);
+        left: calc(50% - 14px);
+      }
+
+      .ele-admin-loading > i {
+        border-radius: 50%;
+        background: #2f54eb;
+      }
+
+      .ele-admin-loading > i:nth-child(2) {
+        opacity: 0.7;
+      }
+
+      .ele-admin-loading > i:nth-child(3) {
+        opacity: 0.5;
+      }
+
+      .ele-admin-loading > i:nth-child(4) {
+        opacity: 0.3;
+      }
+
+      @keyframes loadingRotate {
+        to {
+          transform: rotate(405deg);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-DWf9rLmA.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BteftwH-.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="ele-admin-loading">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+    </div>
+  </body>
+</html>

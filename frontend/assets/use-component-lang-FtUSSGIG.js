@@ -1,0 +1,1 @@
+import{f5 as a,c as o}from"./index-DWf9rLmA.js";function s(e,n){const{locale:t}=a.useI18n();return{lang:o(()=>Object.assign({},e.zh_CN,(t.value?e[t.value]:void 0)||{},n==null?void 0:n.componentLang))}}export{s as u};
